@@ -1,8 +1,6 @@
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
-#include "module.h"
-#include <string>
-#include <fstream>
+
 
 MainWindow::MainWindow(QWidget *parent) :
     QMainWindow(parent),
@@ -24,7 +22,7 @@ void MainWindow::on_pushButton_clicked()
     int* arr;
     int* arr2;
 
-    std::string fileName = "text.txt";
+    //std::string fileName = "text.txt";
     n = unsigned(ui->spinBox->value());
     arr = createRandArr(n);
     fromArrToFile(arr,n,fileName);
@@ -43,7 +41,7 @@ void MainWindow::on_pushButton_2_clicked()
 
     unsigned n;
     int* arr;
-    std::string fileName = "text.txt";
+    //std::string fileName = "text.txt";
 
     n = countLines(fileName);
     arr = fromFileToArr(fileName, n);
@@ -51,3 +49,20 @@ void MainWindow::on_pushButton_2_clicked()
 
     delete arr;
 }
+/*
+void MainWindow::on_actionOpen_triggered()
+{
+    //fileName = QFileDialog::getOpenFileName(this, tr("Open File"), tr("Txt File (*.txt)"));
+    QFileDialog dialog;
+    dialog.setNameFilter(tr("Txt File (*.txt)"));
+    if (dialog.exec())
+    {
+        QString qfileName = dialog.getSaveFileName(this,
+                tr("Save Address Book"), "",
+                tr("Address Book (*.abk);;All Files (*)"));
+
+        //fileName = dialog.select
+        //fileName = dialog.selectFile().toUtf8().constData();
+    }
+}
+*/

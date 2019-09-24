@@ -86,9 +86,7 @@ int* fromFileToArr(std::string fileName, unsigned n)
 {
     int* arr;
     unsigned i;
-    //char endLine;
     std::string str;
-    //char str[50];
     std::ifstream file;
     QString strOut;
 
