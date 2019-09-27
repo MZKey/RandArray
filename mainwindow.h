@@ -21,16 +21,20 @@ public:
     explicit MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+
 private slots:
-    void on_pushButton_clicked();
+    void on_createArrBtn_clicked();
 
-    void on_pushButton_2_clicked();
+    void on_restoreArrBtn_clicked();
 
-    //void on_actionOpen_triggered();
+    void on_spinBox_valueChanged(int arg1);
+
 
 private:
     Ui::MainWindow *ui;
-
+    unsigned n;
+    int* arr;
+    int* arr2;
     std::string fileName = "text.txt";
 
 };

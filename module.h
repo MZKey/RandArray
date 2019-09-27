@@ -9,6 +9,7 @@
 
 #include <QString>
 #include <QtWidgets/QTextEdit>
+#include <QtWidgets/QTableWidget>
 
 
 // Create array with random numbers
@@ -31,3 +32,9 @@ QString fromFileTxt(std::string fileName);
 
 // Numbers from file to array
 int* fromFileToArr(std::string fileName, unsigned n);
+
+// Create cells for tableWidget
+void createCells(QTableWidget* tableWidget, unsigned n);
+
+// Fill the cells of tableWidget
+void fillCells(QTableWidget* tableWidget, int* arr, unsigned n);

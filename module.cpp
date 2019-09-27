@@ -8,7 +8,7 @@ int* createRandArr(unsigned n)
 
     arr = new int[n];
 
-    for(i=0;i<n;i++)
+	for(i=0; i<n; i++)
     {
         arr[i] = rand();
     }
@@ -28,9 +28,9 @@ void fromArrToFile(int* arr, unsigned n, std::string fileName)
     std::ofstream file;
     file.open(fileName);
 
-    for(i=0;i<n;i++)
-    {
-        file<<arr[i]<<"\n";
+	for(i=0;i<n;i++)
+	{
+		file<<arr[i]<<"\n";
     }
     file.close();
 }
@@ -54,13 +54,11 @@ QString fromFileTxt(std::string fileName)
 
 void printToTextEdit(int* arr, unsigned n, QTextEdit* textEdit)
 {
-    unsigned i;
-    QString str;
+	if(textEdit->toPlainText() == "")
+		textEdit->setText(QString::number(arr[0]));
 
-    for(i=0; i<n; i++)
-    {
-        textEdit->append(str.setNum(arr[i]));
-    }
+	for(unsigned i=1; i<n; i++)
+		textEdit->setText(textEdit->toPlainText() + " " + QString::number(arr[i]));
 }
 
 
@@ -88,20 +86,42 @@ int* fromFileToArr(std::string fileName, unsigned n)
     unsigned i;
     std::string str;
     std::ifstream file;
-    QString strOut;
 
     file.open(fileName);
 
     arr = new int[n];
 
-    for(i=0;i<n;i++)
+	for(i=0; i<n; i++)
     {
-        std::getline(file,str);
-        //file >> arr[i];
+		std::getline(file, str);
         arr[i] = std::atoi(str.c_str());
     }
 
     file.close();
     return arr;
+}
+
+
+void createCells(QTableWidget* tableWidget, unsigned n)
+{
+	QTableWidgetItem* cell;
+
+	for(unsigned i=0;i<n;i++)
+	{
+		if(tableWidget->item(0, int(i)) == nullptr)
+		{
+			cell = new QTableWidgetItem();
+			tableWidget->setItem(0, int(i), cell);
+		}
+	}
+}
+
+
+void fillCells(QTableWidget* tableWidget, int* arr, unsigned n)
+{
+	for(unsigned i=0;i<n;i++)
+	{
+		tableWidget->item(0, int(i))->setText(QString::number(arr[i]));
+	}
 }
 
