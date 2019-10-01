@@ -48,13 +48,15 @@ void MainWindow::fillCells(int** matr, unsigned rows, unsigned columns)
 
 void MainWindow::printToTextEdit(int** matr, unsigned rows, unsigned columns)
 {
+	QString str;
     for(unsigned i=0; i<rows; i++)
 	{
+		str = "";
         for(unsigned j=0; j<columns; j++)
 		{
-			ui->textEdit->setText(ui->textEdit->toPlainText() + " " + QString::number(matr[i][j]));
+			str += QString::number(matr[i][j]) + " ";
 		}
-		ui->textEdit->setText(ui->textEdit->toPlainText() + "\n");
+		ui->textEdit->append(str);
 	}
 }
 
