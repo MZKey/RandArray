@@ -28,18 +28,20 @@ private slots:
 
 	void on_btnRestoreMatr_clicked();
 
-    void on_spinBox_valueChanged(int arg1);
+    void createCells(unsigned rows, unsigned columns);
 
-    void createCells(unsigned n);
+    void fillCells(int** matr, unsigned rows, unsigned columns);
 
-	void fillCells(int** matr, unsigned n);
+    void printToTextEdit(int** matr, unsigned rows, unsigned columns);
 
-	void printToTextEdit(int** matr, unsigned n);
+    void on_spinBoxColumns_valueChanged(int arg1);
 
+    void on_spinBoxRows_valueChanged(int arg1);
 
 private:
     Ui::MainWindow *ui;
-    unsigned n;
+    unsigned rows;
+    unsigned columns;
     int* arr;
     int* arr2;
 	int** matrix;

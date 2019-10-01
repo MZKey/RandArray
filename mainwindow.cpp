@@ -7,8 +7,8 @@ MainWindow::MainWindow(QWidget *parent) :
     ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
-	ui->tableWidget->setRowCount(ui->spinBox->value());
-    ui->tableWidget->setColumnCount(ui->spinBox->value());
+    ui->tableWidget->setRowCount(ui->spinBoxRows->value());
+    ui->tableWidget->setColumnCount(ui->spinBoxColumns->value());
 }
 
 
@@ -17,13 +17,13 @@ MainWindow::~MainWindow()
     delete ui;
 }
 
-void MainWindow::createCells(unsigned n)
+void MainWindow::createCells(unsigned rows, unsigned columns)
 {
     QTableWidgetItem* cell;
 
-    for(unsigned i=0;i<n;i++)
+    for(unsigned i=0;i<rows;i++)
     {
-		for(unsigned j=0;j<n;j++)
+        for(unsigned j=0;j<columns;j++)
 		{
 			if(ui->tableWidget->item(int(j), int(i)) == nullptr)
 			{
@@ -35,22 +35,22 @@ void MainWindow::createCells(unsigned n)
 }
 
 
-void MainWindow::fillCells(int** matr, unsigned n)
+void MainWindow::fillCells(int** matr, unsigned rows, unsigned columns)
 {
-    for(unsigned i=0;i<n;i++)
+    for(unsigned i=0;i<rows;i++)
     {
-		for(unsigned j=0;j<n;j++)
+        for(unsigned j=0;j<columns;j++)
 		{
 			ui->tableWidget->item(int(j), int(i))->setText(QString::number(matr[i][j]));
 		}
     }
 }
 
-void MainWindow::printToTextEdit(int** matr, unsigned n)
+void MainWindow::printToTextEdit(int** matr, unsigned rows, unsigned columns)
 {
-	for(unsigned i=0; i<n; i++)
+    for(unsigned i=0; i<rows; i++)
 	{
-		for(unsigned j=0; j<n; j++)
+        for(unsigned j=0; j<columns; j++)
 		{
 			ui->textEdit->setText(ui->textEdit->toPlainText() + " " + QString::number(matr[i][j]));
 		}
@@ -62,19 +62,21 @@ void MainWindow::on_btnCreateMatr_clicked()
 {
     ui->textEdit->clear();
 
-    n = unsigned(ui->spinBox->value());
-	matrix = createRandMatr(n);
-	matrToFile(matrix, n, fileName);
 
+    rows = unsigned(ui->spinBoxRows->value());
+    columns = unsigned(ui->spinBoxColumns->value());
+    matrix = createRandMatr(rows, columns);
+    matrToFile(matrix, rows, columns, fileName);
 
-	n = unsigned(sqrt(countLines(fileName)));
-	matrix2 = fileToMatr(fileName, n);
-	printToTextEdit(matrix2, n);
-	createCells(n);
-	fillCells(matrix2, n);
+    rows = countLines(fileName);
+    columns = countCol(fileName);
+    matrix2 = fileToMatr(fileName,rows,columns);
+    printToTextEdit(matrix2, rows, columns);
+    createCells(rows, columns);
+    fillCells(matrix2, rows, columns);
 
-	deleteMatr(matrix, n);
-	deleteMatr(matrix2, n);
+    deleteMatr(matrix, rows);
+    deleteMatr(matrix2, rows);
 }
 
 
@@ -82,12 +84,13 @@ void MainWindow::on_btnRestoreMatr_clicked()
 {
     ui->textEdit->clear();
 
-	n = unsigned(sqrt(countLines(fileName)));
-	ui->tableWidget->setRowCount(int(n));
-	ui->tableWidget->setColumnCount(int(n));
+    rows = countLines(fileName);
+    columns = countCol(fileName);
+    ui->tableWidget->setRowCount(int(rows));
+    ui->tableWidget->setColumnCount(int(columns));
 
-	matrix2 = fileToMatr(fileName, n);
-	printToTextEdit(matrix2, n);
+    matrix2 = fileToMatr(fileName, rows, columns);
+    printToTextEdit(matrix2, rows);
 
     createCells(n);
 	fillCells(matrix2, n);
@@ -96,9 +99,14 @@ void MainWindow::on_btnRestoreMatr_clicked()
 }
 
 
-void MainWindow::on_spinBox_valueChanged(int arg1)
+void MainWindow::on_spinBoxColumns_valueChanged(int arg1)
 {
-    n = unsigned(arg1);
+    columns = unsigned(arg1);
     ui->tableWidget->setColumnCount(arg1);
-	ui->tableWidget->setRowCount(arg1);
+}
+
+void MainWindow::on_spinBoxRows_valueChanged(int arg1)
+{
+    rows = unsigned(arg1);
+    ui->tableWidget->setRowCount(arg1);
 }
