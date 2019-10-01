@@ -11,10 +11,10 @@
 
 
 // Count of lines in file
-unsigned countLines(std::string fileName);
+unsigned countRows(std::string fileName);
 
 // Count of cullumns in file
-unsigned countCol(std::string fileName);
+unsigned countColumns(std::string fileName);
 
 // Create random matrix
 int** createRandMatr(unsigned rows, unsigned columns);

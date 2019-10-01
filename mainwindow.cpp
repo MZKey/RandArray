@@ -25,10 +25,10 @@ void MainWindow::createCells(unsigned rows, unsigned columns)
     {
         for(unsigned j=0;j<columns;j++)
 		{
-			if(ui->tableWidget->item(int(j), int(i)) == nullptr)
+			if(ui->tableWidget->item(int(i), int(j)) == nullptr)
 			{
 				cell = new QTableWidgetItem();
-				ui->tableWidget->setItem(int(j), int(i), cell);
+				ui->tableWidget->setItem(int(i), int(j), cell);
 			}
 		}
     }
@@ -41,7 +41,7 @@ void MainWindow::fillCells(int** matr, unsigned rows, unsigned columns)
     {
         for(unsigned j=0;j<columns;j++)
 		{
-			ui->tableWidget->item(int(j), int(i))->setText(QString::number(matr[i][j]));
+			ui->tableWidget->item(int(i), int(j))->setText(QString::number(matr[i][j]));
 		}
     }
 }
@@ -68,12 +68,12 @@ void MainWindow::on_btnCreateMatr_clicked()
     matrix = createRandMatr(rows, columns);
     matrToFile(matrix, rows, columns, fileName);
 
-    rows = countLines(fileName);
-    columns = countCol(fileName);
+	rows = countRows(fileName);
+	columns = countColumns(fileName);
     matrix2 = fileToMatr(fileName,rows,columns);
     printToTextEdit(matrix2, rows, columns);
     createCells(rows, columns);
-    fillCells(matrix2, rows, columns);
+	fillCells(matrix2, rows, columns);
 
     deleteMatr(matrix, rows);
     deleteMatr(matrix2, rows);
@@ -84,18 +84,18 @@ void MainWindow::on_btnRestoreMatr_clicked()
 {
     ui->textEdit->clear();
 
-    rows = countLines(fileName);
-    columns = countCol(fileName);
+	rows = countRows(fileName);
+	columns = countColumns(fileName);
     ui->tableWidget->setRowCount(int(rows));
     ui->tableWidget->setColumnCount(int(columns));
 
     matrix2 = fileToMatr(fileName, rows, columns);
-    printToTextEdit(matrix2, rows);
+    printToTextEdit(matrix2, rows, columns);
 
-    createCells(n);
-	fillCells(matrix2, n);
+    createCells(rows, columns);
+    fillCells(matrix2, rows, columns);
 
-	deleteMatr(matrix2, n);
+    deleteMatr(matrix2, rows);
 }
 
 

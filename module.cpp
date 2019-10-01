@@ -1,7 +1,7 @@
 #include "module.h"
 
 
-unsigned countLines(std::string fileName)
+unsigned countRows(std::string fileName)
 {
     std::string str;
     std::ifstream file;
@@ -19,7 +19,7 @@ unsigned countLines(std::string fileName)
     return n;
 }
 
-unsigned countCol(std::string fileName)
+unsigned countColumns(std::string fileName)
 {
     std::string str;
     std::ifstream file;
@@ -33,6 +33,7 @@ unsigned countCol(std::string fileName)
         if(str == "")
             break;
     }
+    n--;
     file.close();
     return n;
 }
@@ -79,8 +80,9 @@ int** fileToMatr(std::string fileName, unsigned rows, unsigned columns)
         matrix[i] = new int[columns];
         for(unsigned j = 0; j < columns; j++ ){
 			std::getline(file, str);
-			matrix[i][j] = std::atoi(str.c_str());
+            matrix[i][j] = std::atoi(str.c_str());
 		}
+        std::getline(file,str);
 	}
 
 	file.close();
@@ -92,9 +94,9 @@ void matrToFile(int** matr, unsigned rows, unsigned columns, std::string fileNam
 	std::ofstream file;
 	file.open(fileName);
 
-	for(unsigned i=0;i<n;i++)
+    for(unsigned i=0;i<rows;i++)
 	{
-		for(unsigned j=0;j<n;j++)
+        for(unsigned j=0;j<columns;j++)
 		{
 			file<<matr[i][j]<<"\n";
 		}
