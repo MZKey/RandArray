@@ -60,7 +60,7 @@
     <item>
      <layout class="QHBoxLayout" name="horizontalLayout_2">
       <item>
-       <widget class="QPushButton" name="restoreArrBtn">
+       <widget class="QPushButton" name="btnRestoreMatr">
         <property name="minimumSize">
          <size>
           <width>164</width>
@@ -69,12 +69,12 @@
         </property>
         <property name="maximumSize">
          <size>
-          <width>164</width>
+          <width>177</width>
           <height>23</height>
          </size>
         </property>
         <property name="text">
-         <string>Восстановить массив из файла</string>
+         <string>Восстановить матрицу из файла</string>
         </property>
         <property name="default">
          <bool>false</bool>
@@ -85,15 +85,21 @@
        </widget>
       </item>
       <item>
-       <widget class="QPushButton" name="createArrBtn">
+       <widget class="QPushButton" name="btnCreateMatr">
+        <property name="sizePolicy">
+         <sizepolicy hsizetype="Maximum" vsizetype="Fixed">
+          <horstretch>0</horstretch>
+          <verstretch>0</verstretch>
+         </sizepolicy>
+        </property>
         <property name="maximumSize">
          <size>
-          <width>88</width>
+          <width>100</width>
           <height>23</height>
          </size>
         </property>
         <property name="text">
-         <string>Создать массив</string>
+         <string>Создать матрицу</string>
         </property>
         <property name="default">
          <bool>false</bool>

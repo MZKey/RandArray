@@ -6,6 +6,7 @@
 
 #include <string>
 #include <fstream>
+#include <math.h>
 
 #include "module.h"
 
@@ -23,11 +24,17 @@ public:
 
 
 private slots:
-    void on_createArrBtn_clicked();
+	void on_btnCreateMatr_clicked();
 
-    void on_restoreArrBtn_clicked();
+	void on_btnRestoreMatr_clicked();
 
     void on_spinBox_valueChanged(int arg1);
+
+    void createCells(unsigned n);
+
+	void fillCells(int** matr, unsigned n);
+
+	void printToTextEdit(int** matr, unsigned n);
 
 
 private:
@@ -35,6 +42,8 @@ private:
     unsigned n;
     int* arr;
     int* arr2;
+	int** matrix;
+	int** matrix2;
     std::string fileName = "text.txt";
 
 };
