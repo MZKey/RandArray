@@ -59,10 +59,10 @@ void deleteMatr(int** matr, unsigned rows)
 {
     for(unsigned i = 0; i<rows; i++)
     {
-        delete matr[i];
+        delete[] matr[i];
     }
 
-    delete matr;
+    delete[] matr;
 }
 
 int** fileToMatr(std::string fileName, unsigned rows, unsigned columns)
