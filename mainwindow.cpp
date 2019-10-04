@@ -70,8 +70,6 @@ void MainWindow::on_btnCreateMatr_clicked()
     matrix = createRandMatr(rows, columns);
     matrToFile(matrix, rows, columns, fileName);
 
-	rows = countRows(fileName);
-	columns = countColumns(fileName);
     matrix2 = fileToMatr(fileName,rows,columns);
     printToTextEdit(matrix2, rows, columns);
     createCells(rows, columns);
@@ -86,12 +84,9 @@ void MainWindow::on_btnRestoreMatr_clicked()
 {
     ui->textEdit->clear();
 
-	rows = countRows(fileName);
-	columns = countColumns(fileName);
+    matrix2 = fileToMatr(fileName, rows, columns);
     ui->tableWidget->setRowCount(int(rows));
     ui->tableWidget->setColumnCount(int(columns));
-
-    matrix2 = fileToMatr(fileName, rows, columns);
     printToTextEdit(matrix2, rows, columns);
 
     createCells(rows, columns);

@@ -23,7 +23,7 @@ int** createRandMatr(unsigned rows, unsigned columns);
 void deleteMatr(int** matr, unsigned n);
 
 // From file to matrix
-int** fileToMatr(std::string fileName, unsigned rows, unsigned columns);
+int** fileToMatr(std::string fileName, unsigned& rows, unsigned& columns);
 
 // From matrix to file
 void matrToFile(int** matr, unsigned rows, unsigned columns, std::string fileName);

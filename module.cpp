@@ -65,13 +65,15 @@ void deleteMatr(int** matr, unsigned rows)
     delete[] matr;
 }
 
-int** fileToMatr(std::string fileName, unsigned rows, unsigned columns)
+int** fileToMatr(std::string fileName, unsigned &rows, unsigned &columns)
 {
 	int** matrix;
 	std::string str;
 	std::ifstream file;
 
 	file.open(fileName);
+    rows = countRows(fileName);
+    columns = countColumns(fileName);
 
     matrix = new int*[rows];
 
