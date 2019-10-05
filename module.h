@@ -28,7 +28,7 @@ void deleteMatr(int** matr, unsigned n);
 vector<vector<int>> fileToMatr(string fileName, unsigned& rows, unsigned& columns);
 
 // From matrix to file
-void matrToFile(vector<vector<int>> &matr, unsigned rows, unsigned columns, string fileName);
+void matrToFile(vector<vector<int>> &matr, string fileName);
 
 // Delete matrix(vector)
 void deleteMatr(vector<vector<int>> &matr);

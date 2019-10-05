@@ -71,15 +71,15 @@ void MainWindow::on_btnCreateMatr_clicked()
 	ui->tableWidget->setColumnCount(int(columns));
 
     matrix = createRandMatr(rows, columns);
-    matrToFile(matrix, rows, columns, fileName);
+	matrToFile(matrix, fileName);
 
     matrix2 = fileToMatr(fileName,rows,columns);
-    printToTextEdit(matrix2, rows, columns);
+	printToTextEdit(matrix2);
     createCells(rows, columns);
-	fillCells(matrix2, rows, columns);
+	fillCells(matrix2);
 
-    deleteMatr(matrix, rows);
-    deleteMatr(matrix2, rows);
+	deleteMatr(matrix);
+	deleteMatr(matrix2);
 }
 
 
@@ -90,12 +90,12 @@ void MainWindow::on_btnRestoreMatr_clicked()
     matrix2 = fileToMatr(fileName, rows, columns);
     ui->tableWidget->setRowCount(int(rows));
     ui->tableWidget->setColumnCount(int(columns));
-    printToTextEdit(matrix2, rows, columns);
+	printToTextEdit(matrix2);
 
     createCells(rows, columns);
-    fillCells(matrix2, rows, columns);
+	fillCells(matrix2);
 
-    deleteMatr(matrix2, rows);
+	deleteMatr(matrix2);
 }
 
 

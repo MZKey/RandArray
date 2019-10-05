@@ -44,11 +44,9 @@ private:
     Ui::MainWindow *ui;
     unsigned rows;
     unsigned columns;
-    int* arr;
-    int* arr2;
 	vector<vector<int>> matrix;
 	vector<vector<int>> matrix2;
-    std::string fileName = "text.txt";
+	string fileName = "text.txt";
 
 };
 

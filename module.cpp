@@ -100,3 +100,19 @@ void deleteMatr(vector<vector<int>> &matr)
 	matr.clear();
 }
 
+void matrToFile(vector<vector<int>> &matr, string fileName)
+{
+	ofstream file;
+	file.open(fileName);
+
+	for(unsigned i=0;i<matr.size();i++)
+	{
+		for(unsigned j=0;j<matr[i].size();j++)
+		{
+			file<<matr[i][j]<<"\n";
+		}
+		file<<"\n";
+	}
+	file.close();
+}
+
