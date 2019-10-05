@@ -198,6 +198,19 @@
         </property>
        </spacer>
       </item>
+      <item>
+       <widget class="QPushButton" name="btnClear">
+        <property name="maximumSize">
+         <size>
+          <width>84</width>
+          <height>23</height>
+         </size>
+        </property>
+        <property name="text">
+         <string>Очистить поля</string>
+        </property>
+       </widget>
+      </item>
      </layout>
     </item>
     <item>

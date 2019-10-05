@@ -21,9 +21,9 @@ void MainWindow::createCells(unsigned rows, unsigned columns)
 {
     QTableWidgetItem* cell;
 
-    for(unsigned i=0;i<rows;i++)
+	for(unsigned i=0;i<rows;i++)
     {
-        for(unsigned j=0;j<columns;j++)
+		for(unsigned j=0; j<columns; j++)
 		{
 			if(ui->tableWidget->item(int(i), int(j)) == nullptr)
 			{
@@ -35,26 +35,26 @@ void MainWindow::createCells(unsigned rows, unsigned columns)
 }
 
 
-void MainWindow::fillCells(int** matr, unsigned rows, unsigned columns)
+void MainWindow::fillCells(vector<vector<int> > &matrix)
 {
-    for(unsigned i=0;i<rows;i++)
+	for(unsigned i=0;i<matrix.size();i++)
     {
-        for(unsigned j=0;j<columns;j++)
+		for(unsigned j=0;j<matrix[i].size();j++)
 		{
-			ui->tableWidget->item(int(i), int(j))->setText(QString::number(matr[i][j]));
+			ui->tableWidget->item(int(i), int(j))->setText(QString::number(matrix[i][j]));
 		}
     }
 }
 
-void MainWindow::printToTextEdit(int** matr, unsigned rows, unsigned columns)
+void MainWindow::printToTextEdit(vector<vector<int> > &matrix)
 {
 	QString str;
-    for(unsigned i=0; i<rows; i++)
+	for(unsigned i=0; i<matrix.size(); i++)
 	{
 		str = "";
-        for(unsigned j=0; j<columns; j++)
+		for(unsigned j=0; j<matrix[i].size(); j++)
 		{
-			str += QString::number(matr[i][j]) + " ";
+			str += QString::number(matrix[i][j]) + " ";
 		}
 		ui->textEdit->append(str);
 	}
@@ -67,6 +67,9 @@ void MainWindow::on_btnCreateMatr_clicked()
 
     rows = unsigned(ui->spinBoxRows->value());
     columns = unsigned(ui->spinBoxColumns->value());
+	ui->tableWidget->setRowCount(int(rows));
+	ui->tableWidget->setColumnCount(int(columns));
+
     matrix = createRandMatr(rows, columns);
     matrToFile(matrix, rows, columns, fileName);
 
@@ -106,4 +109,10 @@ void MainWindow::on_spinBoxRows_valueChanged(int arg1)
 {
     rows = unsigned(arg1);
     ui->tableWidget->setRowCount(arg1);
+}
+
+void MainWindow::on_btnClear_clicked()
+{
+	ui->tableWidget->clear();
+	ui->textEdit->clear();
 }

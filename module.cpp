@@ -1,16 +1,16 @@
 #include "module.h"
 
 
-unsigned countRows(std::string fileName)
+unsigned countRows(string fileName)
 {
-    std::string str;
-    std::ifstream file;
+	string str;
+	ifstream file;
     unsigned n;
     n = 0;
     file.open(fileName);
     while(!file.eof())
     {
-        std::getline(file, str);
+		getline(file, str);
         if(str == "")
            n++;
     }
@@ -19,16 +19,16 @@ unsigned countRows(std::string fileName)
     return n;
 }
 
-unsigned countColumns(std::string fileName)
+unsigned countColumns(string fileName)
 {
-    std::string str;
-    std::ifstream file;
+	string str;
+	ifstream file;
     unsigned n;
     n = 0;
     file.open(fileName);
     while(!file.eof())
     {
-        std::getline(file,str);
+		getline(file,str);
         n++;
         if(str == "")
             break;
@@ -38,18 +38,18 @@ unsigned countColumns(std::string fileName)
     return n;
 }
 
-int** createRandMatr(unsigned rows, unsigned columns)
+vector<vector<int>> createRandMatr(unsigned rows, unsigned columns)
 {
-    int** matr;
+	vector<vector<int>> matr;
 
-    matr = new int*[rows];
+	matr.resize(rows);
 
     for(unsigned i = 0; i<rows; i++)
     {
-        matr[i] = new int[columns];
+		matr[i].resize(columns);
         for(unsigned j = 0; j<columns; j++)
         {
-            matr[i][j] = rand();
+			matr[i][j] = rand();
         }
     }
     return matr;
@@ -65,45 +65,38 @@ void deleteMatr(int** matr, unsigned rows)
     delete[] matr;
 }
 
-int** fileToMatr(std::string fileName, unsigned &rows, unsigned &columns)
+vector<vector<int>> fileToMatr(string fileName, unsigned &rows, unsigned &columns)
 {
-	int** matrix;
-	std::string str;
-	std::ifstream file;
+	vector<vector<int>> matrix;
+	string str;
+	ifstream file;
 
 	file.open(fileName);
     rows = countRows(fileName);
     columns = countColumns(fileName);
 
-    matrix = new int*[rows];
+	matrix.resize(rows);
 
     for(unsigned i=0; i<rows; i++)
 	{
-        matrix[i] = new int[columns];
+		matrix[i].resize(columns);
         for(unsigned j = 0; j < columns; j++ ){
-			std::getline(file, str);
-            matrix[i][j] = std::atoi(str.c_str());
+			getline(file, str);
+			matrix[i][j] = atoi(str.c_str());
 		}
-        std::getline(file,str);
+		getline(file,str);
 	}
 
 	file.close();
 	return matrix;
 }
 
-void matrToFile(int** matr, unsigned rows, unsigned columns, std::string fileName)
+void deleteMatr(vector<vector<int>> &matr)
 {
-	std::ofstream file;
-	file.open(fileName);
-
-    for(unsigned i=0;i<rows;i++)
+	for(unsigned i = 0; i < matr.size(); i++)
 	{
-        for(unsigned j=0;j<columns;j++)
-		{
-			file<<matr[i][j]<<"\n";
-		}
-        file<<"\n";
+		matr[i].clear();
 	}
-	file.close();
+	matr.clear();
 }
 
